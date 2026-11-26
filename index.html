@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kairos ご提案 | 自治体向けインフラDX取り組み紹介サイト デザイン制作</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#16314D;
+    --navy-deep:#0E2235;
+    --slate:#3A5A6D;
+    --teal:#4F9D8C;
+    --sand:#EDE6D6;
+    --bg-light:#F7F5F0;
+    --orange:#E8833D;
+    --text-dark:#1F2D2B;
+    --line:#CBC2AC;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Noto Sans JP',sans-serif;
+    color:var(--text-dark);
+    background:var(--bg-light);
+    line-height:1.85;
+    font-weight:400;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{
+    font-family:'Zen Kaku Gothic New',sans-serif;
+    font-weight:900;
+    letter-spacing:.02em;
+  }
+  .mono{
+    font-family:'Space Mono',monospace;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+  section{position:relative;}
+
+  /* ===================== HERO ===================== */
+  .hero{
+    background:
+      radial-gradient(circle at 80% 20%, rgba(79,157,140,0.25), transparent 55%),
+      linear-gradient(160deg, var(--navy-deep) 0%, var(--navy) 55%, var(--slate) 100%);
+    color:#F2F6F4;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding:100px 0 80px;
+    overflow:hidden;
+  }
+  .hero-grid-bg{
+    position:absolute;
+    inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+    background-size:48px 48px;
+    mask-image:radial-gradient(circle at 70% 30%, black 0%, transparent 75%);
+  }
+  .contour{
+    position:absolute;
+    right:-120px;
+    top:50%;
+    transform:translateY(-50%);
+    width:640px;
+    height:640px;
+    pointer-events:none;
+    opacity:.8;
+  }
+  .contour svg{width:100%;height:100%;}
+  .contour .ring{
+    fill:none;
+    stroke:rgba(79,157,140,.55);
+    stroke-width:1;
+    animation:pulse 6s ease-in-out infinite;
+    transform-origin:center;
+  }
+  .contour .ring:nth-child(2){animation-delay:.6s; stroke:rgba(237,230,214,.35);}
+  .contour .ring:nth-child(3){animation-delay:1.2s;}
+  .contour .ring:nth-child(4){animation-delay:1.8s; stroke:rgba(232,131,61,.4);}
+  @keyframes pulse{
+    0%,100%{opacity:.35; transform:scale(1);}
+    50%{opacity:.9; transform:scale(1.03);}
+  }
+  .node{fill:#EDE6D6;}
+  .hero-inner{
+    position:relative;
+    z-index:2;
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 24px;
+    width:100%;
+  }
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Space Mono',monospace;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    border:1px solid rgba(237,230,214,.4);
+    padding:8px 16px;
+    border-radius:30px;
+    color:var(--sand);
+    margin-bottom:36px;
+  }
+  .badge::before{
+    content:"";
+    width:7px;height:7px;border-radius:50%;
+    background:var(--teal);
+    box-shadow:0 0 0 4px rgba(79,157,140,.2);
+  }
+  .hero h1{
+    font-size:clamp(34px,5.4vw,64px);
+    line-height:1.35;
+    max-width:780px;
+    color:#fff;
+  }
+  .hero h1 .accent{
+    color:var(--teal);
+    display:inline-block;
+  }
+  .hero p.lead{
+    margin-top:28px;
+    font-size:17px;
+    color:rgba(242,246,244,.8);
+    max-width:560px;
+    font-weight:300;
+  }
+  .hero .from{
+    margin-top:44px;
+    font-size:14px;
+    color:rgba(242,246,244,.55);
+    border-top:1px solid rgba(255,255,255,.15);
+    padding-top:20px;
+    max-width:560px;
+  }
+  .hero .from strong{color:var(--sand);font-weight:700;}
+
+  /* ===================== SECTION HEADER ===================== */
+  .section-head{
+    margin-bottom:56px;
+    max-width:700px;
+  }
+  .section-tag{
+    font-family:'Space Mono',monospace;
+    font-size:12px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--teal);
+    display:block;
+    margin-bottom:14px;
+  }
+  .section-head h2{
+    font-size:clamp(26px,3.6vw,38px);
+    color:var(--navy-deep);
+    line-height:1.5;
+  }
+  .section-head p{
+    margin-top:18px;
+    color:var(--slate);
+    font-size:15.5px;
+  }
+
+  /* ===================== UNDERSTANDING ===================== */
+  .understanding{
+    background:var(--bg-light);
+    padding:120px 0 100px;
+    position:relative;
+  }
+  .understanding::before{
+    content:"";
+    position:absolute;
+    top:0;left:0;right:0;
+    height:1px;
+    background:linear-gradient(90deg, transparent, var(--line), transparent);
+  }
+  .two-readers{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+    margin-bottom:56px;
+  }
+  .reader-card{
+    background:#fff;
+    border:1px solid var(--line);
+    padding:36px 32px;
+    position:relative;
+  }
+  .reader-card::before{
+    content:attr(data-num);
+    font-family:'Space Mono',monospace;
+    font-size:13px;
+    color:var(--orange);
+    letter-spacing:.1em;
+    display:block;
+    margin-bottom:18px;
+  }
+  .reader-card h3{
+    font-size:19px;
+    color:var(--navy-deep);
+    margin-bottom:14px;
+  }
+  .reader-card p{
+    font-size:14.5px;
+    color:var(--slate);
+  }
+  .insight-box{
+    background:var(--navy-deep);
+    color:var(--sand);
+    padding:44px 40px;
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:28px;
+    align-items:center;
+  }
+  .insight-box .mark{
+    font-family:'Zen Kaku Gothic New',sans-serif;
+    font-size:60px;
+    font-weight:900;
+    color:var(--teal);
+    line-height:1;
+  }
+  .insight-box p{
+    font-size:15px;
+    line-height:1.9;
+    color:rgba(237,230,214,.9);
+  }
+  .insight-box p strong{
+    color:#fff;
+    font-weight:700;
+  }
+
+  /* ===================== VALUES ===================== */
+  .values{
+    background:#fff;
+    padding:120px 0;
+  }
+  .value-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:2px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .value-card{
+    background:#fff;
+    padding:40px 36px;
+    transition:background .25s ease;
+  }
+  .value-card:hover{
+    background:#FBFAF6;
+  }
+  .value-card .idx{
+    font-family:'Space Mono',monospace;
+    font-size:13px;
+    color:var(--teal);
+    letter-spacing:.1em;
+    margin-bottom:20px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .value-card .idx::after{
+    content:"";
+    height:1px;
+    flex:1;
+    background:var(--line);
+  }
+  .value-card h3{
+    font-size:18.5px;
+    color:var(--navy-deep);
+    margin-bottom:12px;
+    line-height:1.5;
+  }
+  .value-card p{
+    font-size:14px;
+    color:var(--slate);
+  }
+
+  /* ===================== PROCESS ===================== */
+  .process{
+    background:
+      linear-gradient(180deg, var(--bg-light) 0%, var(--sand) 100%);
+    padding:120px 0 110px;
+  }
+  .timeline{
+    position:relative;
+    padding-left:0;
+  }
+  .timeline-track{
+    position:relative;
+  }
+  .timeline-track::before{
+    content:"";
+    position:absolute;
+    left:17px;
+    top:6px;
+    bottom:6px;
+    width:1px;
+    background:repeating-linear-gradient(to bottom, var(--slate) 0, var(--slate) 6px, transparent 6px, transparent 12px);
+  }
+  .t-item{
+    display:grid;
+    grid-template-columns:36px 1fr;
+    gap:24px;
+    padding-bottom:46px;
+    position:relative;
+  }
+  .t-item:last-child{padding-bottom:0;}
+  .t-dot{
+    width:36px;height:36px;
+    border-radius:50%;
+    background:#fff;
+    border:2px solid var(--teal);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Space Mono',monospace;
+    font-size:12px;
+    color:var(--navy-deep);
+    z-index:1;
+    flex-shrink:0;
+  }
+  .t-body{
+    background:#fff;
+    border:1px solid var(--line);
+    padding:22px 26px;
+  }
+  .t-body .t-date{
+    font-family:'Space Mono',monospace;
+    font-size:12px;
+    color:var(--orange);
+    letter-spacing:.08em;
+    display:block;
+    margin-bottom:8px;
+  }
+  .t-body h4{
+    font-size:16.5px;
+    color:var(--navy-deep);
+    margin-bottom:8px;
+  }
+  .t-body p{
+    font-size:13.8px;
+    color:var(--slate);
+  }
+
+  /* ===================== CLOSING ===================== */
+  .closing{
+    background:var(--navy-deep);
+    color:#F2F6F4;
+    padding:120px 0 90px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .closing .ring-bg{
+    position:absolute;
+    left:50%;top:50%;
+    transform:translate(-50%,-50%);
+    width:900px;height:900px;
+    border-radius:50%;
+    border:1px solid rgba(79,157,140,.18);
+  }
+  .closing .ring-bg::before,
+  .closing .ring-bg::after{
+    content:"";
+    position:absolute;
+    inset:90px;
+    border-radius:50%;
+    border:1px solid rgba(79,157,140,.14);
+  }
+  .closing .ring-bg::after{
+    inset:180px;
+    border-color:rgba(237,230,214,.1);
+  }
+  .closing-inner{position:relative; z-index:2;}
+  .closing h2{
+    font-size:clamp(26px,4vw,40px);
+    margin-bottom:22px;
+    color:#fff;
+  }
+  .closing p{
+    max-width:540px;
+    margin:0 auto 42px;
+    color:rgba(242,246,244,.75);
+    font-size:15px;
+    font-weight:300;
+  }
+  .cta-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+    background:var(--teal);
+    color:#0E2235;
+    font-weight:700;
+    font-size:15px;
+    padding:18px 36px;
+    border-radius:4px;
+    text-decoration:none;
+    letter-spacing:.02em;
+    transition:transform .2s ease, background .2s ease;
+  }
+  .cta-btn:hover{
+    background:#5FB2A0;
+    transform:translateY(-2px);
+  }
+  .closing-note{
+    margin-top:50px;
+    font-family:'Space Mono',monospace;
+    font-size:12px;
+    color:rgba(237,230,214,.45);
+    letter-spacing:.08em;
+  }
+
+  footer{
+    background:var(--navy-deep);
+    color:rgba(237,230,214,.4);
+    text-align:center;
+    font-size:12px;
+    padding:26px 0 34px;
+    font-family:'Space Mono',monospace;
+    border-top:1px solid rgba(255,255,255,.06);
+  }
+
+  /* ===================== RESPONSIVE ===================== */
+  @media (max-width:880px){
+    .two-readers{grid-template-columns:1fr;}
+    .value-grid{grid-template-columns:1fr;}
+    .insight-box{grid-template-columns:1fr; text-align:left;}
+    .insight-box .mark{font-size:44px;}
+    .contour{width:420px;height:420px; right:-160px;}
+  }
+  @media (max-width:600px){
+    .hero{padding:90px 0 70px; min-height:unset;}
+    .hero h1{font-size:30px;}
+    .understanding,.values,.process{padding:80px 0;}
+    .closing{padding:90px 0 70px;}
+    .contour{opacity:.5; width:320px; height:320px; right:-140px; top:35%;}
+    .reader-card,.value-card{padding:28px 22px;}
+    .t-body{padding:18px 18px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="contour">
+    <svg viewBox="0 0 400 400">
+      <circle class="ring" cx="200" cy="200" r="60"></circle>
+      <circle class="ring" cx="200" cy="200" r="110"></circle>
+      <circle class="ring" cx="200" cy="200" r="160"></circle>
+      <circle class="ring" cx="200" cy="200" r="195"></circle>
+      <circle class="node" cx="200" cy="140" r="3"></circle>
+      <circle class="node" cx="260" cy="230" r="3"></circle>
+      <circle class="node" cx="140" cy="250" r="3"></circle>
+      <line x1="200" y1="140" x2="260" y2="230" stroke="rgba(237,230,214,.3)" stroke-width="1"></line>
+      <line x1="260" y1="230" x2="140" y2="250" stroke="rgba(237,230,214,.3)" stroke-width="1"></line>
+    </svg>
+  </div>
+  <div class="hero-inner">
+    <span class="badge">Kairos Proposal / Infra DX Site Design</span>
+    <h1>少ない人手で、<br>続いていく<span class="accent">インフラ</span>へ。<br>その歩みを、静かに伝えるサイトを。</h1>
+    <p class="lead">
+      自治体向けインフラDXの取り組みを紹介するWebサイトのデザインについて、
+      Kairosよりご提案いたします。派手さではなく、信頼と分かりやすさを積み上げる設計を目指します。
+    </p>
+    <div class="from">
+      本提案書は <strong>one-pan</strong> 様の募集内容を拝見し、Kairos（Web制作・システム開発チーム）が
+      案件理解と提供価値、進め方をまとめたものです。
+    </div>
+  </div>
+</section>
+
+<!-- ===================== UNDERSTANDING ===================== -->
+<section class="understanding">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">Understanding / 案件理解</span>
+      <h2>届けたい相手は、ふたり。<br>求められているのは、誠実さです。</h2>
+      <p>
+        今回のサイトは、派手な演出で惹きつけるものではなく、見る人が「自分たちにも関係がある」と
+        気づける構成が核心だと理解しています。読む人が異なれば、必要な情報の深さも異なります。
+      </p>
+    </div>
+
+    <div class="two-readers">
+      <div class="reader-card" data-num="READER / 01">
+        <h3>首長など意思決定層の方へ</h3>
+        <p>
+          短時間で全体像をつかみたい方には、ビジョンと3地域の事例を端的に見せる動線が必要です。
+          1画面目の動画から事例・活動報告へ自然に導く、PLATEAU型の構成を踏襲します。
+        </p>
+      </div>
+      <div class="reader-card" data-num="READER / 02">
+        <h3>自治体・地元企業の担当者へ</h3>
+        <p>
+          「自分たちにもできそうか」を判断するには、分野別に絞り込める事例一覧や、
+          詳細な活動報告・コラムが欠かせません。記事が増えても崩れない型を用意します。
+        </p>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <div class="mark">01</div>
+      <p>
+        このサイトの成功は、閲覧数やデザインの派手さでは測れません。<strong>「うちでもやってみたい」という
+        問い合わせにつながるかどうか</strong>が唯一の指標だと理解しています。だからこそ、信頼感・誠実さ・分かりやすさを
+        デザインの判断軸として一貫させることを、Kairosはお約束します。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== VALUES ===================== -->
+<section class="values">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">Value / Kairosが提供できること</span>
+      <h2>WordPressで運用しやすい、<br>崩れないデザインシステムを。</h2>
+      <p>
+        エンジニアの方が迷わずコーディングできること、そして担当者様が記事を更新し続けても
+        体裁が崩れないこと。この2点を軸に、Figma上で完結する設計をご提供します。
+      </p>
+    </div>
+
+    <div class="value-grid">
+      <div class="value-card">
+        <div class="idx">VALUE 01</div>
+        <h3>二者の視点を両立する情報設計</h3>
+        <p>
+          首長層向けの「概要を掴む動線」と、担当者向けの「深掘りできる動線」を
+          1つのトップページ内に共存させ、どちらの読み手も迷わせない構成にします。
+        </p>
+      </div>
+      <div class="value-card">
+        <div class="idx">VALUE 02</div>
+        <h3>Figma Variables による一元管理</h3>
+        <p>
+          色・文字・余白はすべてVariablesで定義し、ボタン・見出し・カードなどの
+          コンポーネントはWordPressブロック1つ分を目安に整理して納品します。
+        </p>
+      </div>
+      <div class="value-card">
+        <div class="idx">VALUE 03</div>
+        <h3>記事が増えても崩れないテンプレート</h3>
+        <p>
+          事例・活動報告・コラムの一覧／詳細は、オートレイアウトを用いた
+          可変テンプレートとして設計し、文字量や写真点数の増減に強い構造にします。
+        </p>
+      </div>
+      <div class="value-card">
+        <div class="idx">VALUE 04</div>
+        <h3>PLATEAU型トップページの再構築</h3>
+        <p>
+          1画面目の動画から事例・活動報告へ滑らかに誘導する構成を、
+          御社の取り組みの温度感に合わせて端正にアレンジしてデザインします。
+        </p>
+      </div>
+      <div class="value-card">
+        <div class="idx">VALUE 05</div>
+        <h3>3種のフォームを1つの型で</h3>
+        <p>
+          お問い合わせ・資料ダウンロード・ウェビナー申込を、プラグインで再現可能な
+          見た目に揃えたうえで、入力しやすい1つのフォームテンプレートとして設計します。
+        </p>
+      </div>
+      <div class="value-card">
+        <div class="idx">VALUE 06</div>
+        <h3>継続を見据えた拡張性</h3>
+        <p>
+          2〜3月のページ追加や、今後の別案件も見据え、
+          後から要素を足しても破綻しないコンポーネント構成を意識して設計します。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROCESS ===================== -->
+<section class="process">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">Process / 進め方とスケジュール</span>
+      <h2>ご提示のスケジュールに沿って、<br>段階的に確定させていきます。</h2>
+      <p>
+        トップページのデザイン案を最短1週間でお見せし、修正2回を含めて
+        年内に主要ページを確定。2027年1月末の先行公開、3月末の完成までご一緒します。
+      </p>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-track">
+        <div class="t-item">
+          <div class="t-dot mono">01</div>
+          <div class="t-body">
+            <span class="t-date">契約後 〜 1週間〜10日</span>
+            <h4>トップページ デザイン案のご提示</h4>
+            <p>サイトマップ・原稿・ロゴ・参考サイト（PLATEAU）を踏まえ、1画面目の動画導線を含むトップ案を作成します。</p>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="t-dot mono">02</div>
+          <div class="t-body">
+            <span class="t-date">〜 年内目標</span>
+            <h4>トップ・主要ページのデザイン確定</h4>
+            <p>修正2回を含めて、ビジョン・事例・活動報告など主要な型を確定させます。</p>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="t-dot mono">03</div>
+          <div class="t-body">
+            <span class="t-date">〜 2027年1月中旬</span>
+            <h4>残りページのデザイン確定</h4>
+            <p>コラム・体制紹介・お問い合わせ（3種のフォーム）など、残りの型を仕上げます。</p>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="t-dot mono">04</div>
+          <div class="t-body">
+            <span class="t-date">2027年1月末</span>
+            <h4>トップ・主要ページ 先行公開</h4>
+            <p>社内エンジニア様によるWordPress実装を見据え、Figmaデータの編集権限をお渡しします。</p>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="t-dot mono">05</div>
+          <div class="t-body">
+            <span class="t-date">2027年2〜3月 〜 3月末完成</span>
+            <h4>残りページの追加・軽微な修正対応</h4>
+            <p>デザイン確定後の軽微な修正は今回のご契約範囲に含めて対応いたします。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CLOSING ===================== -->
+<section class="closing">
+  <div class="ring-bg"></div>
+  <div class="wrap closing-inner">
+    <span class="section-tag" style="color:var(--teal);">Next Step</span>
+    <h2>まずは、30分のオンライン面談から。</h2>
+    <p>
+      「誠実なデザイン」という言葉を大切に、信頼感・分かりやすさを軸にした
+      提案文にてご応募させていただきます。実績・進め方・お見積もりの詳細は、応募時の提案文にてご案内いたします。
+    </p>
+    <a href="#" class="cta-btn">クラウドワークスにて提案文を送る →</a>
+    <div class="closing-note">KAIROS — WEB DESIGN &amp; DEVELOPMENT TEAM</div>
+  </div>
+</section>
+
+<footer>
+  © Kairos. Proposal for one-pan — Infra DX Introduction Site Design
+</footer>
+
+</body>
+</html>
